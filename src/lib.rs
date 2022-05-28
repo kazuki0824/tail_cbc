@@ -1,6 +1,7 @@
 mod decrypt;
 mod encrypt;
 
+pub use cipher;
 pub use decrypt::Decryptor;
 pub use encrypt::Encryptor;
 
