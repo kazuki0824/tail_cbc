@@ -7,7 +7,7 @@ pub use cipher;
 pub use decrypt::Decryptor;
 pub use encrypt::Encryptor;
 
-use crate::unaligned_bytes_mut::{UnalignedBytesDecryptMut, UnalignedBytesEncryptMut};
+pub use crate::unaligned_bytes_mut::{UnalignedBytesDecryptMut, UnalignedBytesEncryptMut};
 use cipher::generic_array::{ArrayLength, GenericArray};
 use cipher::inout::InOutBuf;
 use cipher::{
