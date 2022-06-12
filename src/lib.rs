@@ -45,3 +45,22 @@ impl<C: BlockCipher + BlockDecryptMut + BlockEncrypt + BlockSizeUser> UnalignedB
         }
     }
 }
+impl<C: BlockCipher + BlockEncryptMut + BlockDecrypt + BlockSizeUser> UnalignedBytesEncryptMut
+    for Encryptor<C>
+{
+    fn proc_tail(
+        &self,
+        blocks: &mut InOutBuf<'_, '_, Block<Self>>,
+        tail: &mut InOutBuf<'_, '_, u8>,
+    ) -> Result<(), TailError> {
+        match blocks.get_in().last() {
+            Some(last) => {
+                let mut last: Block<C> = last.clone();
+                self.cipher.decrypt_block(&mut last);
+                tail.xor_in2out(&last[0..tail.len()]);
+                Ok(())
+            }
+            None => Err(TailError {}),
+        }
+    }
+}
