@@ -1,6 +1,6 @@
 [package]
 name = "tail_cbc"
-version = "0.1.0"
+version = "0.1.1"
 description = "Cipher Block Chaining (CBC) block cipher mode of operation with unaligned size support"
 license = "MIT OR Apache-2.0"
 edition = "2021"
@@ -8,9 +8,10 @@ keywords = ["crypto", "block-mode", "ciphers"]
 categories = ["cryptography", "no-std"]
 readme = "README.md"
 repository = "https://github.com/kazuki0824/tail_cbc"
+authors = [ "maleicacid" ]
 
 [dependencies]
-cipher = "0.4.3"
+cipher = ">=0.4.3"
 
 [dev-dependencies]
-cipher = { version = "0.4.3", features = ["dev"] }
+cipher = { version = "^0.4.3", features = ["dev"] }
