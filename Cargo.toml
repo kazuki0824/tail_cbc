@@ -10,7 +10,7 @@ readme = "README.md"
 repository = "https://github.com/kazuki0824/tail_cbc"
 
 [dependencies]
-cipher = { git = "https://github.com/kazuki0824/traits.git", package = "cipher", branch = "unaligned_cipher" }
+cipher = "0.4.3"
 
 [dev-dependencies]
-cipher = { git = "https://github.com/kazuki0824/traits.git", package = "cipher", branch = "unaligned_cipher", features = ["dev"] }
+cipher = { version = "0.4.3", features = ["dev"] }

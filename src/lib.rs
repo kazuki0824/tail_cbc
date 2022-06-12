@@ -1,13 +1,19 @@
 mod decrypt;
 mod encrypt;
+mod unaligned_bytes;
+mod unaligned_bytes_mut;
 
 pub use cipher;
 pub use decrypt::Decryptor;
 pub use encrypt::Encryptor;
 
+use crate::unaligned_bytes_mut::{UnalignedBytesDecryptMut, UnalignedBytesEncryptMut};
 use cipher::generic_array::{ArrayLength, GenericArray};
 use cipher::inout::InOutBuf;
-use cipher::{Block, BlockCipher, BlockDecryptMut, BlockEncrypt, BlockSizeUser, TailError, UnalignedBytesDecryptMut};
+use cipher::{
+    Block, BlockCipher, BlockDecrypt, BlockDecryptMut, BlockEncrypt, BlockEncryptMut,
+    BlockSizeUser
+};
 
 #[inline(always)]
 fn xor<N: ArrayLength<u8>>(out: &mut GenericArray<u8, N>, buf: &GenericArray<u8, N>) {
@@ -16,13 +22,17 @@ fn xor<N: ArrayLength<u8>>(out: &mut GenericArray<u8, N>, buf: &GenericArray<u8,
     }
 }
 
+/// If unaligned tail procesing failed, this struct should be returned.
+#[derive(Debug)]
+pub struct TailError;
+
 impl<C: BlockCipher + BlockDecryptMut + BlockEncrypt + BlockSizeUser> UnalignedBytesDecryptMut
-for Decryptor<C>
+    for Decryptor<C>
 {
     fn proc_tail(
         &self,
-        blocks: &mut InOutBuf<Block<Self>>,
-        tail: &mut InOutBuf<u8>,
+        blocks: &mut InOutBuf<'_, '_, Block<Self>>,
+        tail: &mut InOutBuf<'_, '_, u8>,
     ) -> Result<(), TailError> {
         match blocks.get_in().last() {
             Some(last) => {
