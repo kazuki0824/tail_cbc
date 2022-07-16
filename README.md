@@ -6,6 +6,7 @@
 ![Rust Version][rustc-image]
 [![Project Chat][chat-image]][chat-link]
 [![Build Status][build-image]][build-link]
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkazuki0824%2Ftail_cbc.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fkazuki0824%2Ftail_cbc?ref=badge_shield)
 
 Generic implementation of the [Cipher Block Chaining][CBC] (CBC) block cipher
 mode of operation.
@@ -34,6 +35,9 @@ Licensed under either of:
  * [MIT license](http://opensource.org/licenses/MIT)
 
 at your option.
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkazuki0824%2Ftail_cbc.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fkazuki0824%2Ftail_cbc?ref=badge_large)
 
 ### Contribution
 
